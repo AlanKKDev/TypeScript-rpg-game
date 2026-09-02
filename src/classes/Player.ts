@@ -22,6 +22,8 @@ export abstract class Player {
     public pet?: Pet;
     public inventory: Record<string, number> = {};
 
+    private regenIntervalId?: number;
+
     constructor(username: string, health: number = 100, maxHealth: number = 100) {
         this.username = username;
         this.health = health;
