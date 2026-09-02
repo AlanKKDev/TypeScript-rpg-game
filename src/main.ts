@@ -61,6 +61,7 @@ if (app) {
                 return;
             }
 
+            player.health = playerData.health;
             player.inventory = playerData.inventory ?? {};
             player.pet = playerData.pet;
             player.isAlive = playerData.isAlive;

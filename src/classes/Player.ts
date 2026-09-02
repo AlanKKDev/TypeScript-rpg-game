@@ -87,6 +87,10 @@ export abstract class Player {
         savePlayers();
     }
 
+    protected getCustomStatsHtml(): string {
+        return '';
+    }
+
     public render(): void {
         if (!this.isAlive) return;
 
@@ -117,6 +121,7 @@ export abstract class Player {
         playerDiv.innerHTML = `
             <h1>${this.username}</h1>
             <p>Health: ${this.health} / ${this.maxHealth} (${this.isAlive ? 'Alive' : 'Dead'})</p>
+            ${this.getCustomStatsHtml()}
             <h2>Inventory:</h2>
             <ul>${inventoryHtml}</ul>
             ${equippedPet}
@@ -124,6 +129,7 @@ export abstract class Player {
             <button id="btn-heal">Heal 20 HP</button>
             <button id="btn-loot">Add Random Loot</button>
             <button id="btn-pet">Adopt Pet</button>
+            <button id="btn-use-skill">Use skill</button>
         `;
 
         const attackBtn = playerDiv.querySelector<HTMLButtonElement>(`#btn-attack`);
@@ -148,6 +154,12 @@ export abstract class Player {
         const adoptPet = playerDiv.querySelector<HTMLButtonElement>(`#btn-pet`);
         adoptPet?.addEventListener('click', () => {
             this.assignRandomPet(adoptPet);
+        });
+
+        const useSkill = playerDiv.querySelector<HTMLButtonElement>(`#btn-use-skill`);
+        useSkill?.addEventListener('click', () => {
+            this.useSpecialSkill();
+            this.render();
         });
     }
 }

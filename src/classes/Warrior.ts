@@ -7,11 +7,11 @@ export class Warrior extends Player {
         super(username, 150, 150);
     }
 
-    public takeDamage(amount: number): void {
-        this.health = Math.max(this.health - amount * 0.8, 0);
+    public override takeDamage(amount: number): void {
+        super.takeDamage(amount * 0.8);
     }
 
     public useSpecialSkill(): void {
-        this.heal(30);
+        super.heal(30);
     }
 }
